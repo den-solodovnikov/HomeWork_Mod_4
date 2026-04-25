@@ -8,9 +8,23 @@ authors = [
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
+    "isort (>=8.0.1,<9.0.0)",
+    "flake8 (>=7.3.0,<8.0.0)",
+    "mypy (>=1.20.2,<2.0.0)",
+    "pytest (>=9.0.3,<10.0.0)",
+    "pytest-cov (>=7.1.0,<8.0.0)"
 ]
 
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[dependency-groups]
+dev = [
+    "flake8 (>=7.3.0,<8.0.0)"
+]
+
+[tool.flake8]
+max-line-length = 120
+extend-ignore = ["E501"]
