@@ -2,9 +2,9 @@ from src.category import Category
 from src.product import Product
 
 if __name__ == "__main__":
-    product1 = Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)
-    product2 = Product("Iphone 15", "512GB, Gray space", 210000.0, 8)
-    product3 = Product("Xiaomi Redmi Note 11", "1024GB, Синий", 31000.0, 14)
+    product1 = Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 5, 180000.0)
+    product2 = Product("Iphone 15", "512GB, Gray space", 8, 210000.0)
+    product3 = Product("Xiaomi Redmi Note 11", "1024GB, Синий", 14, 31000.0)
 
     print(product1.name)
     print(product1.description)
@@ -27,19 +27,24 @@ if __name__ == "__main__":
 
     print(category1.name == "Смартфоны")
     print(category1.description)
-    print(len(category1.products))
+    # print(len(category1.products))
     print(category1.category_count)
     print(category1.product_count)
 
-    product4 = Product("55\" QLED 4K", "Фоновая подсветка", 123000.0, 7)
+    product4 = Product("55\" QLED 4K", "Фоновая подсветка", 7, 123000.0)
     category2 = Category("Телевизоры",
                          "Современный телевизор, который позволяет наслаждаться просмотром, станет вашим другом и помощником",
                          [product4])
 
     print(category2.name)
     print(category2.description)
-    print(len(category2.products))
-    print(category2.products)
+    # print(len(category2.products))
+    # print(category2.products)
 
     print(Category.category_count)
     print(Category.product_count)
+    print(category1.get_products)
+    print('До:', category2.get_products)
+    product5 = Product("55\" QLED 4K", "Фоновая подсветка", 7, 2000)
+    print("запускаем", category2.add_product(product5))
+    print('После:', category2.get_products)
