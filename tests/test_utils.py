@@ -78,7 +78,7 @@ def test_create_objects_from_json(input_data, expected_result):
         assert actual_category.description == expected_category.description
 
         # Сравниваем список товаров
-        assert len(actual_category.get_products) == len(expected_category.get_products)
+        assert len(actual_category.products) == len(expected_category.products)
 
         for actual_product, expected_product in zip(actual_category._Category__products, expected_category._Category__products):
             assert actual_product.quantity == expected_product.quantity

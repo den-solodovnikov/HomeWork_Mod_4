@@ -5,7 +5,7 @@ class Product:
     __price: float
     quantity: int
 
-    def __init__(self, name, description, quantity, price=0.0):
+    def __init__(self, name, description, price, quantity):
         self.name = name
         self.description = description
         self.__price = price
@@ -17,9 +17,9 @@ class Product:
         product = cls(
             name = new_product_dict.get("name"),
             description = new_product_dict.get("description"),
-            quantity = new_product_dict.get("quantity", 0)
+            price=new_product_dict.get("price"),
+            quantity = new_product_dict.get("quantity")
         )
-        product.__price = new_product_dict.get("price", 0.0)
 
         return product
 
