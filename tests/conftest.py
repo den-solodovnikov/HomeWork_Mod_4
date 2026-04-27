@@ -16,7 +16,7 @@ def category_smartphone():
         'Смартфоны, как средство не только коммуникации, '
         'но и получение дополнительных функций для удобства жизни',
         [
-            Product('Iphone 15', '512GB, Gray space', 210000.0, 8),
+            Product('Iphone 15', '512GB, Gray space', 210000.0,  8),
             Product('Xiaomi Redmi Note 11', '1024GB, Синий', 31000.0, 14)
         ]
     )
