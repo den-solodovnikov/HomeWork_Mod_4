@@ -18,7 +18,6 @@ def read_json(path) -> Any | None:
         print("Ошибка. Файл не найден")
 
 
-
 def create_objects_from_json(data: dict) -> list:
     """ Функция наполнения объектов Product и Category из внешних данных. """
     categories = []
