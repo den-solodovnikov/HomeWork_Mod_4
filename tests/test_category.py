@@ -1,5 +1,21 @@
+import pytest
+
 from src.category import Category
 from src.product import Product
+
+
+class FaikProduct:
+    """ Фейковый класс продуктов. """
+    name: str
+    description: str
+    __price: float
+    quantity: int
+
+    def __init__(self, name, description, price, quantity):
+        self.name = name
+        self.description = description
+        self.__price = price
+        self.quantity = quantity
 
 
 def test_category_init(category_smartphone, category_tv):
@@ -21,6 +37,12 @@ def test_add_product():
     assert Category.category_count == 5
     assert Category.category_count == 5  # Проверяем, что продукт добавлен в категорию
     assert Category.product_count == 5
+
+    faik_product = FaikProduct("Nokia", "Dark_Grey", 20000, 3)
+    with pytest.raises(TypeError):
+        result = category.add_product(faik_product)
+        assert result == (f'Нельзя добавить {faik_product}, т.к. он не является объектом класса Product,\n'
+                          f'а также его подклассов')
 
 
 def test_get_products():

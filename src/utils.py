@@ -28,10 +28,3 @@ def create_objects_from_json(data: dict) -> list:
         category['products'] = products
         categories.append(Category(**category))
     return categories
-
-
-if __name__ == '__main__':
-    data_products = read_json('../data/products.json')
-    print(data_products)
-    categories = create_objects_from_json(data_products)
-    print(categories[0].name)

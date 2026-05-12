@@ -1,3 +1,6 @@
+from src.product import Product
+
+
 class Category:
     """ Класс представления категорий продуктов. """
     name: str
@@ -13,16 +16,23 @@ class Category:
         Category.category_count += 1
         Category.product_count += len(products) if products else 0
 
-    def add_product(self, new_product) -> None:
-        """ Функция добавляет новй продукт в класс Category.
-         Если такой товар уже присутствует, добавляет количество товаров. """
-        for item in self.__products:
-            if new_product.name == item.name:
-                item.quantity += new_product.quantity
-                item.price = new_product.price
-            else:
-                self.__products.append(new_product)
-        Category.product_count += 1
+    def add_product(self, new_product) -> str | None:
+        """ Функция добавляет новый продукт в класс Category.
+        Если такой товар уже присутствует, добавляет количество товаров.
+        Ничего кроме смартфонов, травы газонной или других продуктов
+        в список добавить нельзя. """
+        if isinstance(new_product, Product) or issubclass(type(new_product), Product):
+            for item in self.__products:
+                if new_product.name == item.name:
+                    item.quantity += new_product.quantity
+                    item.price = new_product.price
+                else:
+                    self.__products.append(new_product)
+            Category.product_count += 1
+        else:
+            print(f'Нельзя добавить {new_product}, т.к. он не является объектом класса Product,\n'
+                  f'а также его подклассов')
+            raise TypeError
 
     @property
     def products(self) -> str:

@@ -49,5 +49,53 @@ class Product:
         return f'{self.name}, {self.price} руб. Остаток: {self.quantity} шт.'
 
     def __add__(self, other):
+        """ Функция сложения товаров только из одинаковых классов продуктов. """
+        if type(other) is type(self):
+            return self.price * self.quantity + other.price * other.quantity
+        else:
+            print('Нельзя складывать товары разных категорий')
+            raise TypeError
 
-        return self.price * self.quantity + other.price * other.quantity
+
+class Smartphone(Product):
+    """ Класс 'Смартфон' является наследником класса 'Product'. """
+    efficiency: float
+    model: str
+    memory: int
+    color: str
+
+    def __init__(self, name, description, price, quantity, efficiency, model, memory, color):
+        super().__init__(name, description, price, quantity)
+        self.efficiency = efficiency
+        self.model = model
+        self.memory = memory
+        self.color = color
+
+    @classmethod
+    def new_product(cls, new_smartphone_dict: dict) -> Smartphone:
+        """ Функция создания нового продукта класса Smartphone. """
+        smartphone = cls(
+            name=new_smartphone_dict.get("name"),
+            description=new_smartphone_dict.get("description"),
+            price=new_smartphone_dict.get("price"),
+            quantity=new_smartphone_dict.get("quantity"),
+            efficiency=new_smartphone_dict.get("efficiency"),
+            model=new_smartphone_dict.get("model"),
+            memory=new_smartphone_dict.get("memory"),
+            color=new_smartphone_dict.get("color")
+        )
+
+        return smartphone
+
+
+class LawnGrass(Product):
+    """ Класс 'Трава газонная' является наследником класса 'Product'. """
+    country: str
+    germination_period: str
+    color: str
+
+    def __init__(self, name, description, price, quantity, country, germination_period, color):
+        super().__init__(name, description, price, quantity)
+        self.country = country
+        self.germination_period = germination_period
+        self.color = color
