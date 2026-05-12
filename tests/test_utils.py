@@ -5,7 +5,7 @@ import pytest
 
 from src.category import Category
 from src.product import Product
-from src.utils import read_json, create_objects_from_json
+from src.utils import create_objects_from_json, read_json
 
 
 @patch('json.load')
@@ -80,7 +80,9 @@ def test_create_objects_from_json(input_data, expected_result):
         # Сравниваем список товаров
         assert len(actual_category.products) == len(expected_category.products)
 
-        for actual_product, expected_product in zip(actual_category._Category__products, expected_category._Category__products):
+        for actual_product, expected_product in zip(
+                actual_category._Category__products, expected_category._Category__products
+        ):
             assert actual_product.quantity == expected_product.quantity
             assert actual_product.name == expected_product.name
             assert actual_product.price == expected_product.price

@@ -28,3 +28,7 @@ def test_get_products():
     category = Category("Смартфоны", "Cредство коммуникации", [product])
     result = category.products.rstrip()
     assert result == "Nokia, 20000 руб. Остаток: 3 шт."
+
+
+def test_category_str(category_smartphone):
+    assert str(category_smartphone) == "Смартфоны, количество продуктов: 22 шт."
