@@ -1,11 +1,28 @@
-class Product:
-    """ Класс представления продуктов. """
-    name: str
-    description: str
-    __price: float
-    quantity: int
+from abc import ABC, abstractmethod
 
+
+class BaseProduct(ABC):
+    """ Абстрактный класс - родительский для класса Product"""
+    @abstractmethod
+    def price(self):
+        pass
+
+
+class MixinRepr:
+    """ Класс-миксин, который при создании объекта, то есть при работе метода __init__,
+    печататает в консоль информацию о том, от какого класса и с какими параметрами был создан объект. """
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def __repr__(self):
+        dict_list = tuple(self.__dict__.values())
+        return f'{self.__class__.__name__}{dict_list}'
+
+
+class Product(MixinRepr, BaseProduct):
+    """ Класс представления продуктов. """
     def __init__(self, name, description, price, quantity):
+        super().__init__()
         self.name = name
         self.description = description
         self.__price = price
@@ -44,9 +61,9 @@ class Product:
                 self.__price = new_price
                 print(f"Установлена цена продукта: {self.__price} руб.")
 
-    def __str__(self):
-
-        return f'{self.name}, {self.price} руб. Остаток: {self.quantity} шт.'
+    # def __str__(self):
+    #
+    #     return f'{self.name}, {self.price} руб. Остаток: {self.quantity} шт.'
 
     def __add__(self, other):
         """ Функция сложения товаров только из одинаковых классов продуктов. """
