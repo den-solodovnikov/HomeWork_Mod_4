@@ -29,7 +29,7 @@ class Product(MixinRepr, BaseProduct):
         self.quantity = quantity
 
     @classmethod
-    def new_product(cls, new_product_dict: dict) -> Product:
+    def new_product(cls, new_product_dict: dict) -> "Product":
         """ Функция создания нового продукта класса Product. """
         product = cls(
             name=new_product_dict.get("name"),
@@ -89,7 +89,7 @@ class Smartphone(Product):
         self.color = color
 
     @classmethod
-    def new_product(cls, new_smartphone_dict: dict) -> Smartphone:
+    def new_product(cls, new_smartphone_dict: dict) -> "Smartphone":
         """ Функция создания нового продукта класса Smartphone. """
         smartphone = cls(
             name=new_smartphone_dict.get("name"),
