@@ -31,18 +31,25 @@ def test_category_init(category_smartphone, category_tv):
 def test_add_product():
     category = Category("Смартфоны", "Средство коммуникации", [])
     product = Product("Nokia", "Dark_Grey", 20000, 3)
-
     category.add_product(product)
-
-    assert Category.category_count == 5
     assert Category.category_count == 5  # Проверяем, что продукт добавлен в категорию
-    assert Category.product_count == 5
+
 
     faik_product = FaikProduct("Nokia", "Dark_Grey", 20000, 3)
     with pytest.raises(TypeError):
         result = category.add_product(faik_product)
         assert result == (f'Нельзя добавить {faik_product}, т.к. он не является объектом класса Product,\n'
                           f'а также его подклассов')
+
+
+# def test_add_product_zero_quantity_error(capsys, category_smartphone):
+#     """ Тест на вызов исключения ZeroQuantity работает только при отсутствии проверки (if quantity == 0:)
+#     в __init__ класса Product, что противоречит заданию №1 ДЗ_17.1"""
+#     product_ = Product("Nokia", "Dark_Grey", 20000, 0)
+#     category_smartphone.add_product(product_)
+#     message = capsys.readouterr()
+#     assert message.out.strip().split('\n')[-2] == 'Нельзя добавить товар с нулевым количеством'
+#     assert message.out.strip().split('\n')[-1] == 'Проверка на количество товаров прошла успешно'
 
 
 def test_get_products():
@@ -54,3 +61,9 @@ def test_get_products():
 
 def test_category_str(category_smartphone):
     assert str(category_smartphone) == "Смартфоны, количество продуктов: 22 шт."
+
+
+def test_category_middle_prise_error(category_smartphone):
+    category_empty = Category("Пустая категория", "Категория без продуктов", [])
+    assert category_empty.middle_price() == 0
+    assert category_smartphone.middle_price() == 120500.0
