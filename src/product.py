@@ -10,7 +10,7 @@ class BaseProduct(ABC):
 
 class MixinRepr:
     """ Класс-миксин, который при создании объекта, то есть при работе метода __init__,
-    печататает в консоль информацию о том, от какого класса и с какими параметрами был создан объект. """
+    выводит в консоль информацию о том, от какого класса и с какими параметрами был создан объект. """
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -26,6 +26,8 @@ class Product(MixinRepr, BaseProduct):
         self.name = name
         self.description = description
         self.__price = price
+        if quantity == 0:
+            raise ValueError('Товар с нулевым количеством не может быть добавлен')
         self.quantity = quantity
 
     @classmethod

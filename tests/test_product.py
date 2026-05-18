@@ -10,6 +10,11 @@ def test_product_init(product):
     assert product.quantity == 8
 
 
+def test_product_init_value_error():
+    with pytest.raises(ValueError):
+        Product("Iphone 15", "512GB, Gray space", 10000.0, 0)
+
+
 @pytest.fixture
 def new_product_dict():
     return {"name": "Iphone 15",

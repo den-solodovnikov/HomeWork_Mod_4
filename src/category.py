@@ -1,3 +1,4 @@
+from src.exceptions import ZeroQuantity
 from src.product import Product
 
 
@@ -23,16 +24,31 @@ class Category:
         в список добавить нельзя. """
         if isinstance(new_product, Product) or issubclass(type(new_product), Product):
             for item in self.__products:
-                if new_product.name == item.name:
-                    item.quantity += new_product.quantity
-                    item.price = new_product.price
+                try:
+                    if item.quantity == 0:
+                        raise ZeroQuantity('Нельзя добавить товар с нулевым количеством')
+                except ZeroQuantity as ex:
+                    print(str(ex))
                 else:
-                    self.__products.append(new_product)
-            Category.product_count += 1
+                    if new_product.name == item.name:
+                        item.quantity += new_product.quantity
+                        item.price = new_product.price
+                    else:
+                        self.__products.append(new_product)
+                    Category.product_count += 1
+                    print('Товар добавлен успешно')
+                finally:
+                    print('Проверка на количество товаров прошла успешно')
         else:
             print(f'Нельзя добавить {new_product}, т.к. он не является объектом класса Product,\n'
                   f'а также его подклассов')
             raise TypeError
+
+    def middle_price(self) -> float | None:
+        try:
+            return round(sum([product.price for product in self.__products]) / len(self.__products), 2)
+        except ZeroDivisionError:
+            return 0
 
     @property
     def products(self) -> str:
